@@ -1,0 +1,1733 @@
+ //count negitive numbers .
+ 
+
+public class CountNegativeNums {
+    public static void main(String[] args) {
+        int[][] arr= { {4,3,2,-1},
+                      {3,2,1,-1},
+                       {1,1,-1,-2},
+                      {-1,-1,-2,-3}
+        };
+        int count =0;
+
+        for (int row = 0; row <arr.length; row++) {
+            for (int ele:arr[row]) {
+
+                if(ele <0){
+                    count++;
+                }
+
+            }
+
+        }
+        System.out.println(count);
+
+    }
+}
+***********************************************
+package com.company;
+
+public class EvenDigits {
+    public static void main(String[] args) {
+        int[] arr = {12, 345, 6, -345214, 1234};
+        System.out.println(find(arr));
+    }
+
+    static int find(int[] arr) {
+        int count = 0;
+        for (int num : arr) {
+            if (even(num))
+                count++;
+        }
+        return count;
+    }
+
+    private static boolean even(int num) {
+        int numberOfDigits = digit(num);
+        return numberOfDigits % 2 == 0;
+
+    }
+    // convert int to string and find length, returns no of digits.
+    static int digit(int n)
+    {   if(n<0){
+            n=n*-1;
+        }
+        String s = String.valueOf(n);
+        int len= s.length();
+        return len;
+    }
+
+
+//find no. of digits in a number and return the count .
+    /*static int digit (int num) {
+        int count=0;
+        if(num<0){     //if -ve num
+            num=num*-1;
+        }
+        if(num==0){    //if num is 0, no. of digits present is 1;
+            return 1;
+        }
+        while(num>0){
+            count++;
+             num =num/10;
+         }
+        return count;
+
+    }*/
+
+//faster and shortcut to find number of digits.using math functions
+    /*static int digit (int num){
+        if(num<0){     //if -ve num
+            num=num*-1;
+        }
+        return (int)(Math.log10(num))+1;
+    }*/
+
+}
+
+
+
+*****************************************************
+
+//Assume you are an awesome parent and want to give your children some cookies. But, you should give each child at most one cookie.
+
+Each child i has a greed factor g[i], which is the minimum size of a cookie that the child will be content with; and each cookie j has a size s[j].
+If s[j] >= g[i], we can assign the cookie j to the child i, and the child i will be content. 
+Your goal is to maximize the number of your content children and output the maximum number.
+
+
+public class AssignCookies {
+    public static void main(String[] args) {
+        int[]s={1,2,3};
+        int[]g={1,2};
+        int flag=0;
+       int count =0;
+       int j;
+        for (int i = 0; i < g.length; i++) {
+            if(flag==0){
+                j=0;
+            }else j=i;
+            for (; j < s.length; j++) {
+                if(s[j]>=g[i]){
+                    count++;
+                    flag=1;
+                    break;
+                }else flag=0;
+            }
+        }
+        System.out.println(count);
+    }
+
+}
+***********************************************
+//Given two integer arrays nums1 and nums2, return an array of their intersection.
+Each element in the result must appear as many times as it shows in both arrays and 
+you may return the result in any order.
+
+import java.util.Arrays;
+
+public class Intersection2Arrays2 {
+    public static void main(String[] args) {
+        int[] arr = {4,9,5};
+        int[] arr2 = {9,4,9,8,4};
+        System.out.println(Arrays.toString(isExist(arr,arr2)));
+    }
+
+    static int[] isExist(int[] arr,int[]arr2) {
+    int[]ans=new int[arr.length];
+        int i=0;
+    for (int k = 0; k < arr.length; k++,i++) {
+
+            for (;i< arr.length;) {
+                int temp=arr[i];
+
+                for (int n:arr2 ) {
+                    if (temp == n) {
+                        ans[k]=temp;
+                        break;
+                    }
+                }break;
+
+            }
+
+
+        }
+
+        return ans;
+    }
+}
+
+*******************************************************
+
+
+// check if any Duplicates are present.
+
+public class ContainsDuplicates {
+    public static void main(String[] args) {
+    int []arr={1,2,3,1};
+    //sort(arr);
+    int majorElement= arr[arr.length-1];
+        System.out.println(sort(arr));
+
+    }
+
+        static boolean  sort(int []num1){
+        int count=0;
+            for (int i = 0; i < num1.length-1; i++) {
+                for (int j = i+1; j >0 ; j--) {
+                    if(num1[j]<num1[j-1]){
+                        int temp=num1[j];
+                        num1[j]=num1[j-1];
+                        num1[j-1]=temp;
+                    }else if(num1[j]==num1[j-1]){
+                        count++;
+                        if(count>=1)
+                        {
+                            return true;
+                        }
+                    }
+                       else break;
+                }
+            }
+            return false ;
+        }
+
+
+}
+************************************************
+
+
+// merge the arrays and return a sorted array.
+
+
+public class MergeArray {
+    public static void main(String[] args) {
+        int[]num1={1,2,3,0,0,0};
+        int m=3;
+        int[] num2={2,5,6};
+        int n=3;
+
+        merge(num1,num2);
+        sort(num1);
+        System.out.println(Arrays.toString(num1));
+
+
+    }
+    static void merge(int []num1,int[]num2){
+       int j=0;
+        for (int i = 3; i < num1.length; i++,j++) {
+            for (; j < num2.length; ) {
+                num1[i]=num2[j];
+                break;
+            }
+
+        }
+
+    }
+    static void sort(int []num1){
+        for (int i = 0; i < num1.length-1; i++) {
+            for (int j = i+1; j >0 ; j--) {
+                if(num1[j]<num1[j-1]){
+                    int temp=num1[j];
+                    num1[j]=num1[j-1];
+                    num1[j-1]=temp;
+                }else break;
+            }
+        }
+
+    }
+}
+
+***************************************************************************
+// the the missing element in the array.
+
+
+public class MissingNumber {
+    public static void main(String[] args) {
+        int[]arr={3,0,1};
+        System.out.println(cyclicSort(arr));
+
+    }
+
+
+    static int  sort(int []arr){
+        boolean swap;
+        for(int i=0;i< arr.length-1;i++){
+
+        swap=false;
+            for (int j = 1; j < arr.length-i ; j++) {
+               if(arr[j]<arr[j-1]){
+                   int temp=arr[j];
+                   arr[j]=arr[j-1];
+                   arr[j-1]=temp;
+                   swap=true;
+               }
+
+            } if(!swap){
+                break;
+            }
+
+        }
+        for(int i=0;i< arr.length-1;i++){
+            if(arr[i+1]!=arr[i]+1){
+             return arr[i+1]-1;
+
+            }
+
+        }return 0;
+
+    }
+
+    
+
+    static int  cyclicSort(int[]arr){
+          for(int i=0; i<arr.length;)
+          {
+              int correct=arr[i];
+
+              if(arr[i]< arr.length && arr[i]!=arr[correct]){
+                  int temp=arr[i];
+                  arr[i]=arr[correct];
+                  arr[correct]=temp;
+              }else i++;
+
+          }
+        for (int index = 0; index < arr.length; index++) {
+            if(arr[index]!=index){
+                return index;
+            }
+        } return arr.length;
+
+
+    }
+
+}
+
+************************************************************************
+Given an array arr of integers, check if there exists two integers N and M such that N is the double of M ( i.e. N = 2 * M).
+
+More formally check if there exists two indices i and j such that :
+
+    i != j
+    0 <= i, j < arr.length
+    arr[i] == 2 * arr[j]
+
+
+public class NandDouble {
+    public static void main(String[] args) {
+        int []arr={7,1,14,11};
+        System.out.println(isExist(arr));
+    }
+
+    static boolean isExist(int[]arr){
+
+        for(int i=0;i< arr.length;i++){
+            for(int j=0;j< arr.length;){
+                if(i==j){
+                    j++;
+                }else
+                if(arr[i]==(2*arr[j])){
+                    return true;
+                }else
+                    j++;
+
+
+            }//return false;
+        } return false;
+    }
+
+}
+
+
+***************************************************************
+// sort as evens together  and odds together .
+
+mport java.util.Arrays;
+
+public class SortEvensAndOdds {
+    public static void main(String[] args) {
+        int[]arr={3,1,2,4};
+        sort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+    static void sort(int[]arr){
+
+        for (int i = 0; i < arr.length-1; i++) {
+            for (int j = i; j < arr.length; j++) {
+               if(arr[j]%2==0){
+                  int temp=arr[i];
+                  arr[i]=arr[j];
+                  arr[j]=temp;
+                  break;
+                }
+            }
+        }
+
+    }
+}
+*********************************************************************
+// square elements and the sort in order.
+
+import java.util.Arrays;
+
+public class SqAndSort {
+    public static void main(String[] args) {
+    int[]arr={-4,-1,0,3,10};
+    sq(arr);
+    sort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    static void sq(int[]arr){
+        for (int i = 0; i < arr.length; i++) {
+            arr[i]=arr[i]*arr[i];
+        }
+    }
+    static void sort(int[]arr){
+        for (int i = 0; i <= arr.length-2; i++) {
+            for (int j = i+1; j >0; j--) {
+                if(arr[j]<arr[j-1]) {
+                    swap(arr, j, j - 1);
+                }else break;
+            }
+        }
+
+    }
+    static void swap(int[]arr,int first,int second){
+        int temp=arr[first];
+        arr[first]=arr[second];
+        arr[second]=temp;
+
+    }
+
+}
+
+******************************************************************
+You are a product manager and currently leading a team to develop a new product. Unfortunately, the latest version of your product fails the quality check. 
+Since each version is developed based on the previous version, all the versions after a bad version are also bad.
+
+Suppose you have n versions [1, 2, ..., n] and you want to find out the first bad one, which causes all the following ones to be bad.
+
+You are given an API bool isBadVersion(version) which returns whether version is bad. Implement a function to find the first bad version. You should minimize the number of calls to the API.
+
+
+public class badVersion {
+    public static void main(String[] args) {
+        int n=15;
+        int bad=5;
+        System.out.println(isBadVersion( n, bad));
+    }
+  //linear search
+    /*static int  isBadVersion(int n,int bad){
+        int firstBad=0;
+       // int start=n;
+        for(int i=n;i>=1;i--){
+            if(i>=bad){
+                firstBad=i;
+            }
+        }
+        return firstBad;
+    }*/
+  static int  isBadVersion(int n,int bad){
+
+     int s=n;
+     int e=1;
+     while(s>=e){
+         int mid=s+(e-s)/2;
+
+         if(mid<bad){
+             e=mid+1;
+         }else if(mid>bad){
+             s=mid-1;
+         } else return mid;
+
+     }return -1;
+
+     }
+
+    }
+
+
+
+***********************************************************************
+// 
+check if the char is present in the given string.
+
+
+
+import java.util.Arrays;
+
+public class StringSearchLinear {
+    public static void main(String[] args) {
+        String s = "hello";
+        char ch ='l';
+        System.out.println(search(s,ch));
+        System.out.println(Arrays.toString(s.toCharArray()));
+
+   }
+   static boolean search (String s,char ch){
+        if(s.length()==0){
+            return false;
+        }
+       /*for (int i = 0; i < s.length(); i++) {
+           char tar= s.charAt(i);
+           if(tar==ch){
+               return true;
+           }*/
+           for(char c:s.toCharArray())
+           {
+               if(c==ch){
+                   return true;
+               }
+           }
+
+       return false ;
+   }
+}
+
+
+**************************************************
+//
+You are given an m x n integer grid accounts where accounts[i][j] is the amount of money the 
+ith customer has in the jth bank. Return the wealth that the richest customer has.
+
+A customer's wealth is the amount of money they have in all their bank accounts. 
+The richest customer is the customer that has the maximum wealth.
+
+
+
+public class Wealth {
+    public static void main(String[] args) {
+        int[][] accounts = {{1,5},
+                            {7,3},
+                            {3,5}
+        };
+        System.out.println(maxWealth(accounts));
+    }
+
+
+    static int maxWealth(int [][]accounts){
+        int max=0;
+        for (int person = 0; person < accounts.length; person++) {
+            int amt=0;
+            for (int bank = 0; bank <accounts[person].length ; bank++) {
+                amt = amt + accounts[person][bank];
+            }
+            if(amt>max){
+                max=amt;
+            }
+
+        }return max;
+    }
+
+
+}
+*********************************************
+Given a characters array letters that is sorted in non-decreasing order and a character target, return the smallest character in the array that is larger than target.
+
+Note that the letters wrap around.
+
+    For example, if target == 'z' and letters == ['a', 'b'], the answer is 'a'.
+
+
+
+public class greatestletter {
+    public static void main(String[] args) {
+       char[] letters = {'c','f','j'};
+       char target= 'c';
+        System.out.println(great(letters,target));
+
+    }
+
+    static char great(char[] letters,char target){
+        int s = 0;
+        int e = letters.length-1;
+        while (s<=e) {
+            int mid = s + (e - s) / 2;
+
+                if (letters[mid] > target) {
+                    e = mid-1;
+                } else  {
+                    s = mid + 1;
+                }
+
+        } return letters[s % letters.length];
+    }
+}
+
+
+
+*******************************************
+//Given the array nums consisting of 2n elements in the form [x1,x2,...,xn,y1,y2,...,yn].
+
+Return the array in the form [x1,y1,x2,y2,...,xn,yn].
+
+
+import java.util.Arrays;
+
+
+public class ShuffleArray {
+    public static void main(String[] args) {
+        int[] arr={2,5,1,3,4,7};   //(x1,x2,x3,y1,y2,y3)
+        int n= arr.length;
+        int s[]=shuffle(arr,n);
+        System.out.println(Arrays.toString(s));
+
+
+    }
+    static int[] shuffle(int []arr, int n){
+        int [] ans=new int[n];
+        int j=0;
+        for (int i = 0; i <n; i+=2,j++) {   //shuffling (x1,y1,x2,y2...)
+
+            ans[i]= arr[j];
+            ans[i+1]=arr[j+(n/2)];
+            }
+        return ans;   // [2, 3, 5, 4, 1, 7]
+    }
+
+}
+
+*************************************
+//There are n kids with candies. You are given an integer array candies, 
+where each candies[i] represents the number of candies the ith kid has, 
+and an integer extraCandies, denoting the number of extra candies that you have.
+
+Return a boolean array result of length n, where result[i] is true if, 
+after giving the ith kid all the extraCandies, 
+they will have the greatest number of candies among all the kids, or false otherwise.
+
+Note that multiple kids can have the greatest number of candies
+
+
+import java.util.Arrays;
+
+public class NumberOfCandies {
+    public static void main(String[] args) {
+        int[] candies ={12,1,12};
+        int n=candies.length;
+        int extra=10;
+       // boolean[] ans= greater(candies,n,extra);
+        System.out.println(Arrays.toString(candies));
+        System.out.println(Arrays.toString(greater(candies,n,extra)));
+    }
+
+    static boolean[] greater(int[]candies,int n,int extra){
+        int ans[]= new int[n];   //to store after adding extras.
+        boolean[] is= new boolean[n];
+        for (int i = 0; i <n ; i++) {
+            ans[i]=extra+candies[i];    //adding extra candies
+            for (int j = 0; j < n; j++) {
+                if(ans[i]>=candies[j]){         //comparing to find is he owns highest candies among all after extras added
+                    is[i]=true;
+                }
+                else {
+                    is[i] = false;
+                    break;
+                }
+
+            }
+        }
+        return is; //[true, false, true]
+    }
+
+
+}
+************************************************
+A peak element is an element that is strictly greater than its neighbors.
+
+Given an integer array nums, find a peak element, and return its index. If the array contains multiple peaks, return the index to any of the peaks.
+
+You may imagine that nums[-1] = nums[n] = -∞.
+
+You must write an algorithm that runs in O(log n) time.
+
+
+public class PeakElement {
+    public static void main(String[] args) {
+        int[]arr={1,2,3,1};
+        System.out.println(peak(arr));
+
+    }
+
+    static int peak(int[]arr){
+        int s=0;
+        int e= arr.length-1;
+        while(s<e){
+            int mid=s+(e-s)/2;
+            if (arr[mid]>arr[mid+1]){
+
+                    e = mid;
+            }
+           else
+               s=mid+1;
+
+
+        }return s;
+
+    }
+}
+
+
+**********************************************************************
+Given an array of integers nums.A pair (i,j) is called good if nums[i] == nums[j] and i < j.Return the number of good pairs.
+        Input: nums = [1,2,3,1,1,3]
+        Output: 4
+        Explanation: There are 4 good pairs (0,3), (0,4), (3,4), (2,5) 0-indexed.
+
+
+public class GoodPair {
+    public static void main(String[] args) {
+        int[] arr={1,2,3};
+        int count=0;
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 1; j < arr.length ; j++) {
+                if((arr[i] == arr[j]) && (i < j)){
+                    count++;
+                }
+
+            }
+
+        }
+        System.out.println(count);
+    }
+}
+********************************************************************
+//
+Given the array nums, for each nums[i] find out how many numbers in the array are smaller than it.
+That is, for each nums[i] you have to count the number of valid j's such that j != i and nums[j] < nums[i].
+
+Return the answer in an array.
+
+
+import java.util.Arrays;
+
+public class SmallerNum {
+    public static void main(String[] args) {
+        int [] arr={8,1,2,2,3};
+        int []compare= new int[arr.length];
+
+        for (int i = 0; i < arr.length; i++) {
+            int count=0;
+            for (int j = 0 ; j < arr.length ; j++) {
+                if(arr[i]>arr[j]){
+                    count++;
+                }
+
+            }
+            compare[i]=count;
+        }
+        System.out.println(Arrays.toString(compare));
+    }
+}
+**************************************************************
+Given an array of integers numbers that is already sorted in non-decreasing order, find two numbers such that they add up to a specific target number.
+
+Return the indices of the two numbers (1-indexed) as an integer array answer of size 2, where 1 <= answer[0] < answer[1] <= numbers.length.
+
+The tests are generated such that there is exactly one solution. You may not use the same element twice.
+
+
+import java.util.Arrays;
+
+public class TwoSum {
+    public static void main(String[] args) {
+       int[]  numbers = {2,3,4};
+        int target = 6;
+        System.out.println(Arrays.toString(ans(numbers,target)));
+    }
+
+    static int[]ans(int[]numbers,int target){
+    int s=0;
+    int e =numbers.length-1;
+    while(s<=e){
+        int sum=numbers[s]+numbers[e];
+        if(sum<target){
+            s++;
+        }else if(sum>target){
+            e--;
+        }else
+            return new int[]{s+1 , e+1} ;
+
+
+    }return new int[]{s+1,e+1};
+
+
+    }
+
+}
+******************************************************
+
+public class searchRotatedArray {
+    public static void main(String[] args) {
+        int [] arr= {4,5,6,7,0,1,2};
+        int target=7;
+        System.out.println(search(arr,target));
+
+    }
+    static int pivot(int []arr){
+        int s=0;
+        int e=arr.length-1;
+        while(s<=e){
+            int mid=s+(e-s)/2;
+            if(mid<e && arr[mid]>arr[mid+1])
+            {
+               return mid;
+            }
+            if(mid>s && arr[mid]<arr[mid-1]){
+                return mid-1;
+            }
+            if(arr[s]>=arr[mid]){
+                e=mid;
+            }
+            else{
+                s=mid+1;
+            }
+        }return -1;
+    }
+    static int search(int []arr,int target){
+        int p=pivot(arr);
+        int ans=0;
+        if(p==-1){
+           return bSearch(arr,target,0,arr.length-1);
+        }
+        else {
+            if(arr[p]==target){
+                return p;
+            }else if(target>=arr[0])
+            return bSearch(arr, target, 0, p);
+            else {
+                return bSearch(arr, target, p + 1, arr.length - 1);
+            }
+        }
+
+    }
+
+    private static int bSearch(int[] arr, int target, int s, int e) {
+        while(s<=e){
+            int mid=s+(e-s)/2;
+            if(target<arr[mid]){
+                e=mid-1;
+            }else if(target>arr[mid]){
+                s=mid+1;
+            }else return mid;
+        }return -1;
+    }
+}
+
+**********************************************
+
+public class SplitArray {
+    public static void main(String[] args) {
+        int [] arr={7,2,5,10,8};
+        int m=2;
+        System.out.println(split(arr,m));
+    }
+
+    static int split(int[]arr,int m){
+
+        int s=0; int e=0;
+        for (int i = 0; i < arr.length; i++) {
+            s=Math.max(s,arr[i]);  // potential answer = least possible sum we can get.
+            e=e+arr[i];  //  potential answer = highest possible sum we can get.
+        }
+
+        while(s<e){
+            int sum=0;
+            int parts=1;
+            int mid=s+(e-s)/2;
+            for(int ele:arr){
+                if(sum+ele>mid){
+                    sum=ele;// forming next array as size of array crosses mid
+                    parts++;
+                }else
+                sum=sum+ele; //size of array not crosses mid so keep adding
+            }
+
+            if(parts<=m){ //less or equal parts
+                e=mid; // mid value more so reduce range
+            }else
+            //if more parts
+            s=mid+1;// mid value less so increase range
+
+
+        }return s; //s==e
+    }
+}
+*********************************************
+
+
+import java.util.Scanner;
+
+public class Factorial {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        System.out.print("enter number:");
+       int  factorial=fact(in.nextInt());
+        System.out.println("the factorial is:" + factorial);
+    }
+   public static int fact(int n){
+       int ans=1;
+        for (int i=n;i>0;i--) {
+
+            ans=ans*i;
+
+        }
+       return ans;
+
+
+   }
+}
+
+****************************************************
+patterns :
+import java.util.Scanner;
+
+public class patterns {
+    public static void main(String[] args) {
+        p22();
+    }
+
+    /*     1.
+     *****
+     *****
+     *****
+     *****
+     *****
+     */
+    static void p1() {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+
+    }
+
+    /* 2.
+     *
+     **
+     ***
+     ****
+     *****
+     */
+    static void p2() {
+        int n = 5;
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j < i; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+
+    }
+
+    /* 3.
+     *****
+     ****
+     ***
+     **
+     *
+     */
+    static void p3() {
+        int n = 5;
+        for (int i = n; i > 0; i--) {
+            int j = 1;
+            while (j <= i) {
+                System.out.print("*");
+                j++;
+            }
+            System.out.println();
+            n--;
+        }
+    }
+    /* 4.
+        1
+        12
+        123
+        1234
+        12345
+     */
+
+    static void p4() {
+        int k = 1;
+        while (k <= 5) {
+            int a = 1;
+            while (a <= k) {
+                System.out.print(a);
+                a++;
+            }
+            System.out.println();
+            k++;
+        }
+    }
+/*
+    5.
+    *
+    **
+    ***
+    ****
+    *****
+    *****
+    ****
+    ***
+    **
+    *
+ */
+    static void p5() {
+        correct();
+        reverse();
+
+    }
+
+    static void correct() {
+        int k = 1;
+        while (k <= 5) {
+            int a = 1;
+            while (a <= k) {
+                System.out.print("*");
+                a++;
+            }
+            System.out.println();
+            k++;
+        }
+    }
+
+    static void reverse() {
+        int n = 5;
+        for (int i = n; i > 0; i--) {
+            int j = 1;
+            while (j <= i) {
+                System.out.print("*");
+                j++;
+            }
+            System.out.println();
+            n--;
+        }
+    }
+/*
+1
+2 3
+4 5 6
+7 8 9 10
+11 12 13 14 15
+ */
+    static void p6(){
+        int n=5;int j=0;
+        for(int i=1;i<=n;i++){
+
+            for(int k=1;k<=i;k++){
+                j++;
+                System.out.print(j+" ");
+
+            }
+            System.out.println();
+        }
+    }
+    /*
+        1
+        0 1
+        1 0 1
+        0 1 0 1
+        1 0 1 0 1
+     */
+
+    static void p7() {
+        int n = 5;
+        int j = 1;
+        for (int i = 1; i <= n; i++) {
+            if (i % 2 == 0) {
+                j = 0;
+            } else j = 1;
+            for (int k = 1; k <= i; k++) {
+                System.out.print(j + " ");
+                if (j == 0) {
+                    j = 1;
+                } else j = 0;
+
+            }System.out.println();
+        }
+    }
+
+    /*
+         *********
+          *******
+           *****
+            ***
+             *
+     */
+    static void p8(){
+        int n=5;
+        for(int row=n;row>0;row--){
+            for (int spc = n; spc >row ; spc--) {
+                System.out.print(" ");
+            }
+            for (int col = 0; col < (2*row)-1; col++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+    /*
+             *
+            ***
+           *****
+          *******
+         *********
+     */
+
+    static void p9(){
+        int n=5;
+        for (int row = 1; row <= n; row++) {
+            for (int spc=n; spc>row; spc--) {
+              System.out.print(" ");
+            }
+            for (int col = 0; col < (2*row)-1; col++) {
+                System.out.print("*");
+
+            }
+            System.out.println();
+        }
+    }
+
+    /*
+             *
+            **
+           ***
+          ****
+         *****
+     */
+    static void p10(){
+        int n=5;
+        for (int row = 1; row <= n; row++) {
+            for (int spc=n; spc>row; spc--) {
+                System.out.print(" ");
+            }
+            for (int col = 0; col <row; col++) {
+                System.out.print("*");
+
+            }
+            System.out.println();
+        }
+    }
+/*
+         *****
+          ****
+           ***
+            **
+             *
+
+ */
+    static void p11(){
+        int n=5;
+        for (int row = n; row >=1; row--) {
+            for (int spc = row; spc < n ; spc++) {
+                System.out.print(" ");
+            }
+            for (int col = 0; col < row; col++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+
+    /*
+     **********
+     ****  ****
+     ***    ***
+     **      **
+     *        *
+     *        *
+     **      **
+     ***    ***
+     ****  ****
+     **********
+     */
+    static void p12(){
+        int n=5;
+        for (int row = 0; row < n ; row++) {
+            for (int spc = n; spc > row ; spc--) {
+                System.out.print("*");
+            }
+            for (int col = 0; col <=(2*row)-1; col++) {
+                System.out.print(" ");
+            }
+            for (int nxt = n; nxt > row; nxt--) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        for (int row = n; row >=1; row--) {
+            for (int spc = n; spc >= row ; spc--) {
+                System.out.print("*");
+            }
+            for (int col = 1; col <(2*row)-1; col++) {
+                System.out.print(" ");
+            }
+            for (int nxt = n; nxt >=row; nxt--) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+/*
+         *        *
+         **      **
+         ***    ***
+         ****  ****
+         **********
+         ****  ****
+         ***    ***
+         **      **
+         *        *
+
+ */
+    static void p13(){
+        int n=5;
+        for (int row = n; row >=1; row--) {
+            for (int spc = n; spc >= row ; spc--) {
+                System.out.print("*");
+            }
+            for (int col = 1; col <(2*row)-1; col++) {
+                System.out.print(" ");
+            }
+            for (int nxt = n; nxt >=row; nxt--) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        for (int row = 1; row < n ; row++) {
+            for (int spc = n; spc > row ; spc--) {
+                System.out.print("*");
+            }
+            for (int col = 0; col <=(2*row)-1; col++) {
+                System.out.print(" ");
+            }
+            for (int nxt = n; nxt > row; nxt--) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+/*
+         ****
+         *  *
+         *  *
+         *  *
+         ****
+ */
+    static void p14(){
+        int length=5;
+        int width=4;
+
+        for (int row = 1; row <= length; row++) {
+            for (int col = 1; col <= width; col++) {
+
+                if(row==1 || row==length || col==1 || col==width){
+                    System.out.print("*");
+                }else System.out.print(" ");
+
+
+            }
+            System.out.println();
+
+        }
+    }
+/*
+             *****
+            *   *
+           *   *
+          *   *
+         *****
+ */
+    static void p15() {
+        int length = 5;
+        int width = length;
+
+        for (int row = 1; row <= length; row++) {
+            for (int spc = length; spc > row; spc--) {
+                System.out.print(" ");
+            }
+            for (int col = 1; col <= width; col++) {
+
+                if (row == 1 || row == length || col == 1 || col == width) {
+                    System.out.print("*");
+                } else System.out.print(" ");
+
+
+            }
+            System.out.println();
+
+        }
+    }
+/*
+             *
+            * *
+           *   *
+          *     *
+         *       *
+         *       *
+          *     *
+           *   *
+            * *
+             *
+ */
+    static void p16(){
+        int n=5;
+        for (int row = 1; row <=n; row++) {
+            for (int spc = row; spc <n ; spc++) {
+                System.out.print(" ");
+            }
+            for (int col = 0; col <(2 * row)-1; col++) {
+                if ( col == 0 || col==((2 * row)-1)-1 ){
+                System.out.print("*");}else
+                    System.out.print(" ");
+            }
+            for (int next = row; next <n ; next++) {
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+        for (int row = n; row > 0; row--) {
+            for (int spc = row; spc <n ; spc++) {
+                System.out.print(" ");
+            }
+            for (int col = 0; col < (2 * row)-1; col++) {
+                if ( col == 0 || col==((2 * row)-1)-1 ){
+                    System.out.print("*");}
+                else
+                    System.out.print(" ");
+
+            }
+            for (int next = row; next <=n ; next++) {
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+    }
+    /*
+     *********
+      *     *
+       *   *
+        * *
+         *
+     */
+
+    static void p17(){
+        int n=5;
+        for (int row = n; row > 0; row--) {
+            for (int spc = row; spc <n ; spc++) {
+                System.out.print(" ");
+            }
+            for (int col = 0; col < (2 * row)-1; col++) {
+                if (row==n|| col == 0 || col==((2 * row)-1)-1 ){
+                    System.out.print("*");}
+                else
+                    System.out.print(" ");
+
+            }
+            for (int next = row; next <=n ; next++) {
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+
+    }
+/*
+             *
+            * *
+           *   *
+          *     *
+         *********
+ */
+    static void p18(){
+        int n=5;
+        for (int row = 1; row <=n; row++) {
+            for (int spc = row; spc <n ; spc++) {
+                System.out.print(" ");
+            }
+            for (int col = 0; col < (2 * row)-1; col++) {
+                if (row==n| col == 0 || col==((2 * row)-1)-1 ){
+                    System.out.print("*");}
+                else
+                    System.out.print(" ");
+
+            }
+            for (int next = row; next <=n ; next++) {
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+
+    }
+/*
+     * * * * *
+      * * * *
+       * * *
+        * *
+         *
+ */
+
+    static void p19(){
+        int n=5;
+        for (int row = n; row > 0; row--) {
+            for (int spc = row; spc <n ; spc++) {
+                System.out.print(" ");
+            }
+            for (int col = 0; col < (2 * row)-1; col++) {
+                if (col%2==0 ){
+                    System.out.print("*");}
+                else
+                    System.out.print(" ");
+
+            }
+            for (int next = row; next <=n ; next++) {
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+
+    }
+    /*
+                 *
+                * *
+               * * *
+              * * * *
+             * * * * *
+     */
+    static void p20(){
+        int n=5;
+        for (int row = 1; row <=n; row++) {
+            for (int spc = row; spc <n ; spc++) {
+                System.out.print(" ");
+            }
+            for (int col = 0; col < (2 * row)-1; col++) {
+                if (col%2==0 ){
+                    System.out.print("*");}
+                else
+                    System.out.print(" ");
+
+            }
+            for (int next = row; next <=n ; next++) {
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+
+    }
+    /*
+               *   *
+              * * * *
+             *   *   *
+  */
+
+    static void p21(){
+        int n=5;
+        for (int row = 1; row <=n; row++) {
+            for (int spc = row; spc <n ; spc++) {
+                System.out.print(" ");
+            }
+            for (int col = 0; col < (2 * row)-1; col++) {
+                if(( row>=3 && row<=n) && (col == 0 || col == 4||col == ((2 * row) - 1) - 1)||(row==4&&col==2))
+                        System.out.print("*");
+                else
+                    System.out.print(" ");
+            }
+            for (int next = row; next <=n ; next++) {
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+
+    }
+/*
+             *        *
+             **      **
+             * *    * *
+             *  *  *  *
+             *   **   *
+             *   **   *
+             *  *  *  *
+             * *    * *
+             **      **
+             *        *
+ */
+    static void p22(){
+        int n=5;
+        for (int row = n; row >=1; row--) {
+            for (int spc = n; spc >= row ; spc--) {
+                if(spc==n||spc==(row))
+                    System.out.print("*");
+                else System.out.print(" ");
+            }
+            for (int col = 1; col <(2*row)-1; col++) {
+                System.out.print(" ");
+            }
+            for (int nxt = n; nxt >=row; nxt--) {
+                if(nxt==n||nxt==(row))
+                    System.out.print("*");
+                else System.out.print(" ");
+            }
+            System.out.println();
+        }
+        for (int row = 0; row < n ; row++) {
+            for (int spc = n; spc > row ; spc--) {
+                if(spc==n||spc==(row+1))
+                System.out.print("*");
+                else System.out.print(" ");
+            }
+            for (int col = 0; col <=(2*row)-1; col++) {
+                System.out.print(" ");
+            }
+            for (int nxt = n; nxt > row; nxt--) {
+                if(nxt==n||nxt==(row+1))
+                    System.out.print("*");
+                else System.out.print(" ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+******************************************************
+Searching in a 2 dimentioanl array.
+
+
+import java.util.Arrays;
+
+public class SearchIn2d {
+    public static void main(String[] args) {
+        int [][]arr={
+                {4,7,33},
+                {77,5,88,3,99},
+                {100,145,8,-1,754},
+                {0,4,-90,6}
+        };
+        int target= 876;
+        int[] ans= search(arr,target);
+        System.out.println(Arrays.toString(ans));
+
+        System.out.println("maximum : "+ max(arr));
+        System.out.println("minimum : "+ min(arr));
+    }
+
+
+
+    static int[] search(int [][]arr, int target){
+        if(arr.length==0){
+            return new int[] {-1,-1};
+        }
+        for (int row = 0; row <arr.length ; row++) {
+            for (int col = 0; col < arr[row].length; col++) {
+                int ele = arr[row][col];
+                if(ele==target){
+                    return new int[]{row, col};
+
+                }
+            }
+
+        }
+        return new int[] {-1,-1};
+    }
+
+    static int max(int[][] arr){
+        int max= arr[0][0];  // or  max=Integer.MIN_VALUE;
+        for (int[] ints : arr) {
+            for (int col = 1; col < ints.length; col++) {
+                int ele = ints[col];
+                if (ele > max) max = ele;
+            }
+
+        }
+        return max;
+    }
+//minimum value
+    static int min(int[][] arr){
+        int min= arr[0][0];  // or  max=Integer.MIN_VALUE;
+        for (int[] ints : arr) {
+            for (int col = 1; col < ints.length; col++) {
+                int ele = ints[col];
+                if (ele < min) min = ele;
+            }
+
+        }
+        return min;
+    }
+}
+
+*****************************************************************************
+
+
+import java.util.Scanner;
+
+public class GoldenRectangles {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+
+        double ratio;
+        int count=0;
+        for(int i=1;i<=n;i++){
+            int width=in.nextInt();
+            int height=in.nextInt();
+
+            if(width>height)
+            {
+                ratio=width/height;
+
+                if(ratio>=1.6 && ratio<=1.7)
+                {
+                    count++;
+                }
+            }
+            if(width<height)
+            {
+                ratio=height/width;
+
+                if(ratio>=1.6 && ratio<=1.7)
+                {
+                    count++;
+                }
+            }
+
+        }
+        System.out.println(count);
+
+    }
+}
+
+**************************************************
+
+
+public class Floor {
+    public static void main(String[] args) {
+        int [] arr= {2,3,5,9,25,36,66};
+        int target=7;
+        System.out.println(floor(arr,target));
+    }
+
+    static int floor(int []arr,int target){
+
+
+        int start=0;
+        int end= arr.length-1;
+
+        while(start<=end){
+            int  mid=start+(end-start)/2;
+
+            if(arr[start]<=arr[end]){
+                if(target< arr[start]){
+                    return -1;
+                }
+                if(arr[mid]>target){
+                    end=mid-1;
+                }else if(arr[mid]<target){
+                    start=mid+1;
+                }else
+                    return arr[mid];
+            }
+            else  {
+                if(target<arr[end]){
+                    return -1;
+                }
+                if(arr[mid]<target){
+                    end=mid-1;
+                }else if(arr[mid]>target){
+                    start=mid+1;
+                }else
+                {
+                    return arr[mid];
+                }
+
+            }
+
+        }
+        return arr[end]; // 
+    }
+}
+
+******************************************
+
+
+public class Ceiling {
+    public static void main(String[] args) {
+        int [] arr= {66,36,25,9,5,3,1};
+        int target=23;
+        System.out.println(ceil(arr,target));
+    }
+//return smallest no >=target.
+    static int ceil(int []arr,int target){
+   // but if target is greater than the greatest num in array
+
+        int start=0;
+        int end= arr.length-1;
+
+        while(start<=end){
+           int  mid=start+(end-start)/2;
+
+           if(arr[start]<=arr[end]){
+               if(target>arr[end]){
+                   return -1;
+               }
+               if(arr[mid]>target){
+                   end=mid-1;
+               }else if(arr[mid]<target){
+                   start=mid+1;
+               }else
+                 return arr[mid];
+           }
+           else {
+               if(target>arr[start]){
+                   return -1;
+               }
+               if(arr[mid]<target){
+                   end=mid-1;
+               }else if(arr[mid]>target){
+                   start=mid+1;
+               }else
+               {
+                   return arr[mid];
+               }
+
+           }
+
+        }
+        return arr[start]; 
+    }
+}
+****************************************************
+
+public class PeakIndexMountainArray {
+    public static void main(String[] args) {
+    int []arr = { 0,1,2,4,7,8,5,3,2};
+        System.out.println(search(arr));
+    }
+    static int search(int[] arr) {
+        int s=0;
+        int e= arr.length-1;
+        while(s<e){
+            int mid=s+(e-s)/2;
+            if(arr[mid] > arr[mid+1]){
+               if (arr[mid] < arr[mid-1]) {
+                   e = mid-1 ;
+               }
+//               else {
+//                   return arr[mid] ;
+//               }
+            }
+            else {
+                s=mid+1;
+            }
+        }return arr[s];
+    }
+}
+
+
+
+
+
+
